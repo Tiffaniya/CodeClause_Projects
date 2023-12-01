@@ -120,7 +120,7 @@ textarea.grid()
 # Output Frame
 frame_output=Frame(mainframe)
 frame_output.grid(row=3,column=0)
-i
+
 elapsed_time_label=Label(frame_output,text='Elapsed Time',font=('Tahoma',12,'bold'),fg='red')
 elapsed_time_label.grid(row=0,column=0,padx=5)
 
