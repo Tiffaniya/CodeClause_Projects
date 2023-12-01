@@ -1,22 +1,25 @@
-from tkinter import * #importing all the classes and methods of tkinter module
+#importing all the classes and methods of tkinter module
+from tkinter import * 
 import random
 import ttkthemes
 from tkinter import ttk
 from time import sleep
 import threading
 
-
-###########Functionality Part
+# Initializing variables
 totaltime=60
 time=0
 wrongwords=0
 elapsedtimeinminutes=0
+
+# Function to start the timer
 def start_timer():
     startButton.config(state=DISABLED)
     global time
     textarea.config(state=NORMAL)
     textarea.focus()
 
+     # Timer loop
     for time in range(1,61):
         elapsed_timer_label.config(text=time)
         remainingtime=totaltime-time
@@ -27,6 +30,7 @@ def start_timer():
     textarea.config(state=DISABLED)
     resetButton.config(state=NORMAL)
 
+# Function to count statistics
 def count():
     global wrongwords
     while time!=totaltime:
@@ -51,7 +55,7 @@ def count():
     accuracy=round(accuracy)
     accuracy_percent_label.config(text=str(accuracy)+'%')
 
-
+# Function to start both timer and statistics counting
 def start():
     t1=threading.Thread(target=start_timer)
     t1.start()
@@ -59,7 +63,7 @@ def start():
     t2 = threading.Thread(target=count)
     t2.start()
 
-
+# Function to reset the test
 def reset():
     global time,elapsedtimeinminutes
     time=0
@@ -77,11 +81,7 @@ def reset():
     totalwords_count_label.config(text='0')
     wrongwords_count_label.config(text='0')
 
-
-
-
-########GUI Part
-
+# Initialize the Tkinter window
 root= ttkthemes.ThemedTk()
 root.get_themes()
 root.set_theme('radiance')
@@ -91,7 +91,7 @@ root.overrideredirect(True)
 
 mainframe=Frame(root,bd=4)
 mainframe.grid()
-
+# Title Frame
 titleframe=Frame(mainframe,bg='black')
 titleframe.grid()
 
@@ -99,6 +99,7 @@ titleLabel=Label(titleframe,text=' Typing Test',font=('algerian',28,'bold'),bg='
                  ,width=38,bd=10)
 titleLabel.grid(pady=5)
 
+# Paragraph Frame
 paragraph_frame=Frame(mainframe)
 paragraph_frame.grid(row=1,column=0)
 
@@ -108,6 +109,7 @@ paragraph_list=open("sample.txt", "r").read().split("\n")
 label_paragraph=Label(paragraph_frame,text=random.choice(paragraph_list),wraplength=912,justify=LEFT,font=('arial',14,'bold'))
 label_paragraph.grid(row=0,column=0)
 
+# Textarea Frame
 textarea_frame=Frame(mainframe)
 textarea_frame.grid(row=2,column=0)
 
@@ -115,6 +117,7 @@ textarea=Text(textarea_frame,font=('arial',12,'bold'),width=100,height=7,bd=4,re
               ,state=DISABLED)
 textarea.grid()
 
+# Output Frame
 frame_output=Frame(mainframe)
 frame_output.grid(row=3,column=0)
 i
@@ -154,6 +157,7 @@ accuracy_label.grid(row=0,column=10,padx=5)
 accuracy_percent_label=Label(frame_output,text='0',font=('Tahoma',12,'bold'))
 accuracy_percent_label.grid(row=0,column=11,padx=5)
 
+# Buttons Frame
 buttons_Frame=Frame(mainframe)
 buttons_Frame.grid(row=4,column=0)
 
@@ -166,6 +170,8 @@ resetButton.grid(row=0,column=1,padx=10)
 exitButton=ttk.Button(buttons_Frame,text='Exit',command=root.destroy)
 exitButton.grid(row=0,column=2,padx=10)
 
+# Keyboard Frame
+#  the code for GUI setup and keyboard layout
 keyboard_frame=Frame(mainframe)
 keyboard_frame.grid(row=5,column=0)
 
@@ -296,4 +302,5 @@ for small_alphabets in range(len(binding_small_alphabets)):
 
 root.bind('<space>',lambda event:changeBG(space_label[0]))
 
+# Start the main GUI loop
 root.mainloop()
