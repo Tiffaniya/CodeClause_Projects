@@ -44,16 +44,16 @@ frame_score.grid(row=1, column=0, sticky=NW)
 frame_buttons = Frame(window, width=300, height=340, bg=co1, pady=0, padx=0)
 frame_buttons.grid(row=2, column=0, sticky=NW)
 
-
-
+# Initialize variables
 all_values =  ""
 text_value  = StringVar()
 
+# Create the display screen
 app_screen = Label(frame_score, width=16, height=2, textvariable=text_value, padx=7, anchor="e", bd=0, justify=RIGHT, font=("Ivy 18"), bg=co1,fg= co3)
 app_screen.place(x=0, y=0)
 
 #Button  to Enter Numbers and Symbles
-
+# (Buttons 1 to 18 are defined here)
 b_1 = Button(frame_buttons, text="C", command= lambda : clear_screen(), width=11, height=2, bg=co3, fg=co1, font=("Ivy 13 bold"), relief=RAISED,
              overrelief=RIDGE)
 b_1.place(x=0, y=0)
